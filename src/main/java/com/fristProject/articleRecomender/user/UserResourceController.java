@@ -27,6 +27,9 @@ public class UserResourceController {
 	public User getAllUsers(@PathVariable int id) {
 		
 		User user = service.findOne(id);
+		if (user == null) {
+			throw new UserNotFoundException("id" + id);
+		}
 		return user;
 	}
 	
