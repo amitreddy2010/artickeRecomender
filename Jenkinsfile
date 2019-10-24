@@ -14,6 +14,8 @@ pipeline {
         }
         stage('Deploy') {
             steps {
+            	sh 'cf login -a https://api.run.pivotal.io -u amitkarkala@dbs.com -p Amit#2013 -o articleRecommender -s development'
+            	sh 'cf push'
                 echo 'Deploying....'
             }
         }
