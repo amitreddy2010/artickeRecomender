@@ -2,12 +2,18 @@ package com.fristProject.articleRecomender.user;
 
 import java.util.Date;
 
+import javax.validation.constraints.Past;
+import javax.validation.constraints.Size;
+
 public class User {
 
 	private Integer id;
 	//validation min car
+	
+	@Size(min=2)
 	private String name;
 	//validation past
+	@Past
 	private Date birthDate;
 	
 	protected User() {
