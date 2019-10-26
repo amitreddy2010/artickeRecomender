@@ -2,11 +2,20 @@ package com.fristProject.articleRecomender.user;
 
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.Id;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
 
-public class User {
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
+//@JsonIgnoreProperties(value = {"orgnization"})
+@Entity
+public class User {
+	@Id
+	@GeneratedValue
 	private Integer id;
 	//validation min car
 	
@@ -15,7 +24,9 @@ public class User {
 	//validation past
 	@Past
 	private Date birthDate;
-	
+//	@JsonIgnore
+//	private String orgnization = "dbs";
+
 	protected User() {
 		
 	}
@@ -43,5 +54,12 @@ public class User {
 	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
 	}
+	
+//	public String getOrgnization() {
+//		return orgnization;
+//	}
+//	public void setOrgnization(String orgnization) {
+//		this.orgnization = orgnization;
+//	}
 	
 }
