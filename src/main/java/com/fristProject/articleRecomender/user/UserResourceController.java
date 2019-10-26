@@ -52,15 +52,12 @@ public class UserResourceController {
 	@DeleteMapping(path="/users/{id}")
 	public void deleteUser(@PathVariable int id) {
 		
-		User user = service.deleteById(id);
-		if (user == null) {
-			throw new UserNotFoundException("id" + id);
-		}
+		userRepo.deleteById(id);
 	}
 	
 	@PostMapping(path="/users")
 	public ResponseEntity<Object> saveUser(@Valid @RequestBody User user) {
-		User savedUser =  service.saveUser(user);
+		User savedUser =  userRepo.save(user);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedUser.getId()).toUri();
 		
 		return ResponseEntity.created(location).build();
