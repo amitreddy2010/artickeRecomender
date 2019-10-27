@@ -18,6 +18,8 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import com.fristProject.articleRecomender.post.Post;
+
 
 @RestController
 public class UserResourceController {
@@ -28,6 +30,9 @@ public class UserResourceController {
 	
 	@Autowired
 	private UserRepository userRepo;
+	
+	@Autowired
+	private PostRepository postRepo;
 	
 	@GetMapping(path="/users")
 	public List<User> getAllUsers() {
@@ -63,6 +68,36 @@ public class UserResourceController {
 		return ResponseEntity.created(location).build();
 	}
 	
+	
+	@GetMapping(path="/users/{id}/posts")
+	public List<Post> getAllPostsForUser(@PathVariable int id) {
+		
+		Optional<User> user = userRepo.findById(id);
+		if (!user.isPresent()) {
+			throw new UserNotFoundException("id" + id);
+		}
+		
+		return user.get().getPosts();
+	}
+	
+	@PostMapping(path="/users/{id}/posts")
+	public ResponseEntity<Object> savePostForUser(@PathVariable int id, @RequestBody Post post) {
+		
+		Optional<User> userOpt = userRepo.findById(id);
+		if (!userOpt.isPresent()) {
+			throw new UserNotFoundException("id" + id);
+		}
+		
+		User user = userOpt.get();
+		
+		post.setUser(user);
+		postRepo.save(post);
+		
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(post.getPost_id()).toUri();
+		
+		return ResponseEntity.created(location).build();
+		
+	}
 	
 //	@GetMapping(path="/users")
 //	public User getAllUsers(@PathVariable String name) {
