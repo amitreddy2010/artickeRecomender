@@ -16,7 +16,7 @@ public class Post {
 	@Id
 	@GeneratedValue
 	private Integer post_id;
-	private String name;
+	private String title;
 	//Weak
 	@ManyToOne(fetch = FetchType.LAZY)
 	@JsonIgnore
@@ -25,10 +25,10 @@ public class Post {
 	protected Post() {
 		
 	}
-	public Post(Integer post_id, String name, User user) {
+	public Post(Integer post_id, String title, User user) {
 		super();
 		this.post_id = post_id;
-		this.name = name;
+		this.title = title;
 		this.user = user;
 	}
 	public Integer getPost_id() {
@@ -37,11 +37,11 @@ public class Post {
 	public void setPost_id(Integer post_id) {
 		this.post_id = post_id;
 	}
-	public String getName() {
-		return name;
+	public String getTitle() {
+		return title;
 	}
-	public void setName(String name) {
-		this.name = name;
+	public void setTitle(String title) {
+		this.title = title;
 	}
 	public User getUser() {
 		return user;
