@@ -1,16 +1,16 @@
 package com.fristProject.articleRecomender.user;
 
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import javax.validation.constraints.Size;
+
+import org.hibernate.annotations.NaturalId;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -24,26 +24,45 @@ public class User {
 	private Integer id;
 	//validation min car
 	
-	@Size(min=2)
-	private String name;
-	//validation past
-	@Past
-	private Date birthDate;
-//	@JsonIgnore
-//	private String orgnization = "dbs";
+	@NotNull
+    @Size(max = 100)
+    @NaturalId
+    private String name;
+
+    @ManyToMany(fetch = FetchType.LAZY,
+            cascade = {
+                CascadeType.PERSIST,
+                CascadeType.MERGE
+            })
+    @JoinTable(name = "post_user",
+            joinColumns = { @JoinColumn(name = "user_id") },
+            inverseJoinColumns = { @JoinColumn(name = "post_id") })
+    private Set<Post> posts = new HashSet<>();
+
+	public User(Integer id, @NotNull @Size(max = 100) String name, Set<Post> posts) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.posts = posts;
+	}
 	
-	@OneToMany(mappedBy="user")
-	private List<Post> posts;
+	public User( @NotNull @Size(max = 100) String name) {
+		super();
+		this.name = name;
+	}
+
+	public Set<Post> getPosts() {
+		return posts;
+	}
+
+	public void setPosts(Set<Post> posts) {
+		this.posts = posts;
+	}
 
 	protected User() {
 		
 	}
-	public User(Integer id, String name, Date birthDate) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.birthDate = birthDate;
-	}
+
 	public Integer getId() {
 		return id;
 	}
@@ -56,24 +75,5 @@ public class User {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Date getBirthDate() {
-		return birthDate;
-	}
-	public void setBirthDate(Date birthDate) {
-		this.birthDate = birthDate;
-	}
-	public List<Post> getPosts() {
-		return posts;
-	}
-	public void setPosts(List<Post> posts) {
-		this.posts = posts;
-	}
-	
-//	public String getOrgnization() {
-//		return orgnization;
-//	}
-//	public void setOrgnization(String orgnization) {
-//		this.orgnization = orgnization;
-//	}
-	
+
 }

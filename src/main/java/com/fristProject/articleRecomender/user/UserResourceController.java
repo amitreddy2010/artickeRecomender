@@ -69,35 +69,40 @@ public class UserResourceController {
 	}
 	
 	
-	@GetMapping(path="/users/{id}/posts")
-	public List<Post> getAllPostsForUser(@PathVariable int id) {
-		
-		Optional<User> user = userRepo.findById(id);
-		if (!user.isPresent()) {
-			throw new UserNotFoundException("id" + id);
-		}
-		
-		return user.get().getPosts();
+//	@GetMapping(path="/users/{id}/posts")
+//	public List<Post> getAllPostsForUser(@PathVariable int id) {
+//		
+//		Optional<User> user = userRepo.findById(id);
+//		if (!user.isPresent()) {
+//			throw new UserNotFoundException("id" + id);
+//		}
+//		
+//		return user.get().getPosts();
+//	}
+	
+	@GetMapping(path="/posts")
+	public List<Post> getAllPosts() {	
+		return postRepo.findAll();
 	}
 	
-	@PostMapping(path="/users/{id}/posts")
-	public ResponseEntity<Object> savePostForUser(@PathVariable int id, @RequestBody Post post) {
-		
-		Optional<User> userOpt = userRepo.findById(id);
-		if (!userOpt.isPresent()) {
-			throw new UserNotFoundException("id" + id);
-		}
-		
-		User user = userOpt.get();
-		
-		post.setUser(user);
-		postRepo.save(post);
-		
-		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(post.getPost_id()).toUri();
-		
-		return ResponseEntity.created(location).build();
-		
-	}
+//	@PostMapping(path="/users/{id}/posts")
+//	public ResponseEntity<Object> savePostForUser(@PathVariable int id, @RequestBody Post post) {
+//		
+//		Optional<User> userOpt = userRepo.findById(id);
+//		if (!userOpt.isPresent()) {
+//			throw new UserNotFoundException("id" + id);
+//		}
+//		
+//		User user = userOpt.get();
+//		
+//		post.setUser(user);
+//		postRepo.save(post);
+//		
+//		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(post.getPost_id()).toUri();
+//		
+//		return ResponseEntity.created(location).build();
+//		
+//	}
 	
 //	@GetMapping(path="/users")
 //	public User getAllUsers(@PathVariable String name) {

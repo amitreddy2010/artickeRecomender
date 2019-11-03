@@ -9,18 +9,18 @@ import org.springframework.stereotype.Component;
 @Component
 public class PostServiceDAO {
 	
-	private static List<Post> posts = new ArrayList<>();
+//	private static List<Post> posts = new ArrayList<>();
 			
-	public static int postsCount = 3;
-	static{
-//		posts.add(new Post(1, "amit", new Date()));
-//		posts.add(new Post(2, "reshma", new Date()));
-//		posts.add(new Post(3, "pratyu", new Date()));
-	}
+//	public static int postsCount = 3;
+//	static{
+////		posts.add(new Post(1, "amit", new Date()));
+////		posts.add(new Post(2, "reshma", new Date()));
+////		posts.add(new Post(3, "pratyu", new Date()));
+//	}
 	
-	public List<Post> findAll() {
-		return posts;
-	}
+//	public List<Post> findAll() {
+//		return posts;
+//	}
 	
 //	public Post savePost(Post post) {
 //		if(user.getId() == null) {
