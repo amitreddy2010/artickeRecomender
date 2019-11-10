@@ -20,7 +20,7 @@ import com.fristProject.articleRecomender.post.Post;
 @Entity
 public class User {
 	@Id
-	@GeneratedValue
+//	@GeneratedValue
 	private Integer id;
 	//validation min car
 	
@@ -46,8 +46,9 @@ public class User {
 		this.posts = posts;
 	}
 	
-	public User( @NotNull @Size(max = 100) String name) {
+	public User(Integer id, @NotNull @Size(max = 100) String name) {
 		super();
+		this.id = id;
 		this.name = name;
 	}
 

@@ -18,8 +18,8 @@ import io.micrometer.core.instrument.Tag;
 @Table(name = "posts")
 public class Post {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Integer id;
 
     @NotNull
     @Size(max = 100)
@@ -59,15 +59,16 @@ public class Post {
 
     }
 
-	public Post(@NotNull @Size(max = 100) String title, @NotNull @Size(max = 250) String description,
+	public Post(Integer id,@NotNull @Size(max = 100) String title, @NotNull @Size(max = 250) String description,
 			@NotNull String content) {
 		super();
+		this.id = id;
 		this.title = title;
 		this.description = description;
 		this.content = content;
 	}
 	
-	public Post(Long id, @NotNull @Size(max = 100) String title, @NotNull @Size(max = 250) String description,
+	public Post(Integer id, @NotNull @Size(max = 100) String title, @NotNull @Size(max = 250) String description,
 			@NotNull String content, @NotNull Date postedAt, @NotNull Date lastUpdatedAt, Set<User> users) {
 		super();
 		this.id = id;
@@ -82,12 +83,12 @@ public class Post {
 
 
 
-	public Long getId() {
+	public Integer getId() {
 		return id;
 	}
 
 
-	public void setId(Long id) {
+	public void setId(Integer id) {
 		this.id = id;
 	}
 

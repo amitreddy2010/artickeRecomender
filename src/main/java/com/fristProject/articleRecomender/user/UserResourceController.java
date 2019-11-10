@@ -9,6 +9,7 @@ import javax.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.hateoas.Resource;
 import org.springframework.hateoas.mvc.ControllerLinkBuilder;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -62,6 +63,10 @@ public class UserResourceController {
 	
 	@PostMapping(path="/users")
 	public ResponseEntity<Object> saveUser(@Valid @RequestBody User user) {
+		Optional<User> user1 = userRepo.findById(user.getId());
+		if (user1.isPresent()) {
+			throw new UserNotFoundException("id" + user.getId());
+		}
 		User savedUser =  userRepo.save(user);
 		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(savedUser.getId()).toUri();
 		
@@ -80,29 +85,30 @@ public class UserResourceController {
 //		return user.get().getPosts();
 //	}
 	
-	@GetMapping(path="/posts")
+	@GetMapping(path="/posts", consumes = MediaType.ALL_VALUE, produces = { "application/json", "text/json" })
 	public List<Post> getAllPosts() {	
 		return postRepo.findAll();
 	}
 	
-//	@PostMapping(path="/users/{id}/posts")
-//	public ResponseEntity<Object> savePostForUser(@PathVariable int id, @RequestBody Post post) {
-//		
-//		Optional<User> userOpt = userRepo.findById(id);
-//		if (!userOpt.isPresent()) {
-//			throw new UserNotFoundException("id" + id);
-//		}
-//		
-//		User user = userOpt.get();
-//		
-//		post.setUser(user);
-//		postRepo.save(post);
-//		
-//		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(post.getPost_id()).toUri();
-//		
-//		return ResponseEntity.created(location).build();
-//		
-//	}
+	@PostMapping(path="/users/{id}/posts")
+	public ResponseEntity<Object> savePostForUser(@PathVariable int id, @RequestBody Post post) {
+		
+		Optional<User> userOpt = userRepo.findById(id);
+		if (!userOpt.isPresent()) {
+			throw new UserNotFoundException("id" + id);
+		}
+		
+		User user = userOpt.get();
+		
+        user.getPosts().add(post);
+
+        userRepo.save(user);
+		
+		URI location = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(user.getId()).toUri();
+		
+		return ResponseEntity.created(location).build();
+		
+	}
 	
 //	@GetMapping(path="/users")
 //	public User getAllUsers(@PathVariable String name) {

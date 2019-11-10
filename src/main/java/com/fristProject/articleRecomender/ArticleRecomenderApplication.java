@@ -28,19 +28,19 @@ public class ArticleRecomenderApplication implements CommandLineRunner {
         // Cleanup the tables
         postRepository.deleteAllInBatch();
         userRepository.deleteAllInBatch();
-
+//        userRepository.resetUserTable();
         // =======================================
 
         
         // Create two tags
-        User user1 = new User("Spring Boot");
-        User user2 = new User("Hibernate");
+        User user1 = new User(1,"Spring Boot");
+        User user2 = new User(3,"Hibernate");
         
      // Create a Post
-        Post post1 = new Post("Hibernate Many to Many Example with Spring Boot",
+        Post post1 = new Post(1,"Hibernate Many to Many Example with Spring Boot",
                 "Learn how to map a many to many relationship using hibernate",
                 "Entire Post content with Sample code");
-        Post post2 = new Post("sample title",
+        Post post2 = new Post(4,"sample title",
                 "sampleDescription",
                 "Con");
 
@@ -52,17 +52,17 @@ public class ArticleRecomenderApplication implements CommandLineRunner {
         user2.getPosts().add(post2);
         
         // Add tag references in the post
-        post1.getUsers().add(user1);
-        post1.getUsers().add(user2);
-        post2.getUsers().add(user2);
+//        post1.getUsers().add(user1);
+//        post1.getUsers().add(user2);
+//        post2.getUsers().add(user2);
 
         
 
         userRepository.save(user1);
         userRepository.save(user2);
 
+//        userRepository.delete(user2);
         // =======================================
-
     }
 
 }
