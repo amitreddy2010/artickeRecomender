@@ -17,4 +17,7 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 //    @Modifying
 //    @Query("ALTER TABLE user AUTO_INCREMENT=1")
 //    void resetUserTable();
+	
+	@Query("SELECT a FROM Recc a")
+	List<Recc> reccTable();
 }

@@ -40,6 +40,11 @@ public class UserResourceController {
 		return userRepo.findAll();
 	}
 	
+	@GetMapping(path="/recc")
+	public List<Recc> getAllReccomendationList() {
+		return userRepo.reccTable();
+	}
+	
 	@GetMapping(path="/users/{id}")
 	public Resource<User> getAllUsers(@PathVariable int id) {
 		
