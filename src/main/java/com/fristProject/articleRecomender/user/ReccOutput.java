@@ -16,19 +16,19 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fristProject.articleRecomender.post.Post;
 
-//@JsonIgnoreProperties(value = {"orgnization"})
 @Entity
-@Table(name = "recc_table")
-public class Recc {
-//	@GeneratedValue
+@Table(name = "recc_out")
+public class ReccOutput {
 	@Id
+//	@GeneratedValue
 	private Integer title_id;
 	//validation min car
-	
+
 	@NotNull
     @Size(max = 100)
-    private String recc_fields;
-
+    @NaturalId
+    private String recc_value;
+ 
 	public Integer getTitle_id() {
 		return title_id;
 	}
@@ -37,21 +37,21 @@ public class Recc {
 		this.title_id = title_id;
 	}
 
-	public String getRecc_fields() {
-		return recc_fields;
+	public String getRecc_value() {
+		return recc_value;
 	}
 
-	public void setRecc_fields(String recc_fields) {
-		this.recc_fields = recc_fields;
+	public void setRecc_value(String recc_value) {
+		this.recc_value = recc_value;
 	}
 
-	public Recc(Integer title_id, @NotNull @Size(max = 100) String recc_fields) {
+	public ReccOutput(Integer title_id, @NotNull @Size(max = 100) String recc_value) {
 		super();
 		this.title_id = title_id;
-		this.recc_fields = recc_fields;
+		this.recc_value = recc_value;
 	}
 	
-	protected Recc() {
+	protected ReccOutput() {
 		
 	}
 
