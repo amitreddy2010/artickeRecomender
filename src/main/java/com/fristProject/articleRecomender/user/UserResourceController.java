@@ -3,6 +3,7 @@ import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 import java.net.URI;
 import java.util.List;
 import java.util.Optional;
+import java.util.Set;
 
 import javax.validation.Valid;
 
@@ -45,24 +46,32 @@ public class UserResourceController {
 		return userRepo.subscriptionTable();
 	}
 	
+	@GetMapping(path="/reccomendationPosts/{id}")
+	public List<ReccOutput> getAllReccomendationPosts(@PathVariable int id) {
+		List<ReccOutput> reccList = userRepo.reccomendationsListTable();
+		
+		return reccList;
+	}
+	
 	@GetMapping(path="/reccomendationsList")
 	public List<ReccOutput> getAllReccomendationList() {
 		return userRepo.reccomendationsListTable();
 	}
 	
 	@GetMapping(path="/users/{id}")
-	public Resource<User> getAllUsers(@PathVariable int id) {
+	public Set<Post> getAllUsers(@PathVariable int id) {
 		
 		Optional<User> user = userRepo.findById(id);
 		if (!user.isPresent()) {
 			throw new UserNotFoundException("id" + id);
 		}
 		
+		Set<Post> posts = user.get().getPosts();
 		//HateOAS
-		Resource<User> resource = new Resource<User>(user.get());
-		ControllerLinkBuilder linkTo = linkTo(methodOn(this.getClass()).getAllUsers());
-		resource.add(linkTo.withRel("all-users"));
-		return resource;
+//		Resource<Post> resource = new Resource<Post>(user.get().getPosts());
+//		ControllerLinkBuilder linkTo = linkTo(methodOn(this.getClass()).getAllUsers());
+//		resource.add(linkTo.withRel("all-users"));
+		return posts;
 	}
 	
 	@DeleteMapping(path="/users/{id}")
@@ -118,6 +127,25 @@ public class UserResourceController {
 		
 		return ResponseEntity.created(location).build();
 		
+	}
+	
+	@PostMapping(path="/users/{id}/remove_post")
+	public void deletePostForUser(@PathVariable int id, @RequestBody Post post) {
+		
+		Optional<User> userOpt = userRepo.findById(id);
+		if (!userOpt.isPresent()) {
+			throw new UserNotFoundException("id" + id);
+		}
+		
+		User user = userOpt.get();
+		
+		if(user.getPosts().contains(post)) {
+			user.getPosts().remove(post);
+		}
+		else {
+			throw new UserNotFoundException("id" + id);
+		}
+
 	}
 	
 //	@GetMapping(path="/users")
