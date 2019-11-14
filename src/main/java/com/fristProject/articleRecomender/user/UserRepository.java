@@ -18,9 +18,9 @@ public interface UserRepository extends JpaRepository<User, Integer> {
 //    @Query("ALTER TABLE user AUTO_INCREMENT=1")
 //    void resetUserTable();
 	
-	@Query("SELECT a FROM Recc a")
-	List<Recc> subscriptionTable();
+	@Query("SELECT a FROM ReccIn a")
+	List<ReccIn> subscriptionTable();
 	
-	@Query("SELECT a FROM ReccOutput a")
-	List<ReccOutput> reccomendationsListTable();
+	@Query("SELECT a FROM ReccOut a")
+	List<ReccOut> reccomendationsListTable();
 }

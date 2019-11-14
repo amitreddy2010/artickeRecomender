@@ -42,19 +42,19 @@ public class UserResourceController {
 	}
 	
 	@GetMapping(path="/subscriptionList")
-	public List<Recc> getAllSubscriptionList() {
+	public List<ReccIn> getAllSubscriptionList() {
 		return userRepo.subscriptionTable();
 	}
 	
 	@GetMapping(path="/reccomendationPosts/{id}")
-	public List<ReccOutput> getAllReccomendationPosts(@PathVariable int id) {
-		List<ReccOutput> reccList = userRepo.reccomendationsListTable();
+	public List<ReccOut> getAllReccomendationPosts(@PathVariable int id) {
+		List<ReccOut> reccList = userRepo.reccomendationsListTable();
 		
 		return reccList;
 	}
 	
 	@GetMapping(path="/reccomendationsList")
-	public List<ReccOutput> getAllReccomendationList() {
+	public List<ReccOut> getAllReccomendationList() {
 		return userRepo.reccomendationsListTable();
 	}
 	
@@ -139,12 +139,16 @@ public class UserResourceController {
 		
 		User user = userOpt.get();
 		
-		if(user.getPosts().contains(post)) {
-			user.getPosts().remove(post);
-		}
-		else {
-			throw new UserNotFoundException("id" + id);
-		}
+//		if(user.getPosts().contains(post)) {
+		Set<Post> posts = user.getPosts();
+		posts.remove(post);
+		user.setPosts(posts);
+        userRepo.save(user);
+
+//		}
+//		else {
+//			throw new UserNotFoundException("id" + id);
+//		}
 
 	}
 	
