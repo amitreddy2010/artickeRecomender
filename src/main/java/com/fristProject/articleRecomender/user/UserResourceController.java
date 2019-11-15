@@ -2,6 +2,7 @@ package com.fristProject.articleRecomender.user;
 import static org.springframework.hateoas.mvc.ControllerLinkBuilder.*;
 import java.net.URI;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Set;
 
@@ -141,7 +142,12 @@ public class UserResourceController {
 		
 //		if(user.getPosts().contains(post)) {
 		Set<Post> posts = user.getPosts();
-		posts.remove(post);
+		for (Post value : posts) {
+	        if (Objects.equals(post.getId(), value.getId())) {
+	        	posts.remove(value);
+	        }
+	    }
+
 		user.setPosts(posts);
         userRepo.save(user);
 
