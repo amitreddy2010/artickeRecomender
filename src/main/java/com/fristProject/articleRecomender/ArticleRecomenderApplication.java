@@ -33,16 +33,20 @@ public class ArticleRecomenderApplication implements CommandLineRunner {
 
         
         // Create two tags
-        User user1 = new User(1,"Spring Boot");
-        User user2 = new User(3,"Hibernate");
+        User user1 = new User(0,"Amit");
+        User user2 = new User(1,"Suresh");
+        User user3 = new User(2,"Bob");
+        User user4 = new User(3,"Justin");
+        User user5 = new User(4,"nikhil");
+        User user6 = new User(5,"Sandip");
         
      // Create a Post
-        Post post1 = new Post(1,"Hibernate Many to Many Example with Spring Boot",
-                "Learn how to map a many to many relationship using hibernate",
-                "Entire Post content with Sample code");
-        Post post2 = new Post(4,"sample title",
-                "sampleDescription",
-                "Con");
+        Post post1 = new Post(1,"DBS Holdings",
+                "DBS Group Holdings Limited and its subsidiaries provide a variety of financial services. ",
+                "1.0");
+        Post post2 = new Post(4,"Patamar Capital",
+                "Patamar Capital exists to unlock better economic opportunities for Asia’s low-income communities. ",
+                "1.0");
 
 
 
@@ -50,18 +54,13 @@ public class ArticleRecomenderApplication implements CommandLineRunner {
         user1.getPosts().add(post1);
         user2.getPosts().add(post1);
         user2.getPosts().add(post2);
-        
-        // Add tag references in the post
-//        post1.getUsers().add(user1);
-//        post1.getUsers().add(user2);
-//        post2.getUsers().add(user2);
-
-        
 
         userRepository.save(user1);
         userRepository.save(user2);
-
-//        userRepository.delete(user2);
+        userRepository.save(user3);
+        userRepository.save(user4);
+        userRepository.save(user5);
+        userRepository.save(user6);
         // =======================================
     }
 

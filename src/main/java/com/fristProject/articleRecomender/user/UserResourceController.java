@@ -48,10 +48,23 @@ public class UserResourceController {
 	}
 	
 	@GetMapping(path="/reccomendationPosts/{id}")
-	public List<ReccOut> getAllReccomendationPosts(@PathVariable int id) {
+	public List<Post> getAllReccomendationPosts(@PathVariable int id) {
 		List<ReccOut> reccList = userRepo.reccomendationsListTable();
+		ReccOut reccValue = null;
+		for (ReccOut value : reccList) {
+	        if (Objects.equals(id, value.getUserId())) {
+	        	reccValue = value;
+	        	break;
+	        }
+	    }
+		String[] values = reccValue.getReccValues().split(",");
 		
-		return reccList;
+		List<Post> posts =  postRepo.findAll();
+		for (int i = 0; i < posts.size(); i++) {
+			posts.get(i).setContent( values[i]);
+	    }
+		
+		return posts;
 	}
 	
 	@GetMapping(path="/reccomendationsList")
@@ -92,18 +105,6 @@ public class UserResourceController {
 		
 		return ResponseEntity.created(location).build();
 	}
-	
-	
-//	@GetMapping(path="/users/{id}/posts")
-//	public List<Post> getAllPostsForUser(@PathVariable int id) {
-//		
-//		Optional<User> user = userRepo.findById(id);
-//		if (!user.isPresent()) {
-//			throw new UserNotFoundException("id" + id);
-//		}
-//		
-//		return user.get().getPosts();
-//	}
 	
 	@GetMapping(path="/posts", consumes = MediaType.ALL_VALUE, produces = { "application/json", "text/json" })
 	public List<Post> getAllPosts() {	

@@ -22,12 +22,12 @@ public class Post {
     private Integer id;
 
     @NotNull
-    @Size(max = 100)
+    @Size(max = 250)
     @Column(unique = true)
     private String title;
 
     @NotNull
-    @Size(max = 250)
+    @Size(max = 1000)
     private String description;
 
     @NotNull
