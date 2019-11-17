@@ -37,18 +37,27 @@ public class UserResourceController {
 	@Autowired
 	private PostRepository postRepo;
 	
+	//Home screen user list service
 	@GetMapping(path="/users")
 	public List<User> getAllUsers() {
 		return userRepo.findAll();
 	}
 	
+	//Matrix table1
 	@GetMapping(path="/subscriptionList")
 	public List<ReccIn> getAllSubscriptionList() {
 		return userRepo.subscriptionTable();
 	}
 	
+	//Matrix table2
+	@GetMapping(path="/reccomendationsList")
+	public List<ReccOut> getAllReccomendationList() {
+		return userRepo.reccomendationsListTable();
+	}
+	
+	//Tab 3 recommendation list
 	@GetMapping(path="/reccomendationPosts/{id}")
-	public List<Post> getAllReccomendationPosts(@PathVariable int id) {
+	public List<Post> getAllReccomendationPostsForUser(@PathVariable int id) {
 		List<ReccOut> reccList = userRepo.reccomendationsListTable();
 		ReccOut reccValue = null;
 		for (ReccOut value : reccList) {
@@ -64,16 +73,22 @@ public class UserResourceController {
 			posts.get(i).setContent( values[i]);
 	    }
 		
+		
+		Optional<User> user = userRepo.findById(id);
+		if (!user.isPresent()) {
+			throw new UserNotFoundException("id" + id);
+		}
+		
+		Set<Post> userPosts = user.get().getPosts();
+		
+		posts.removeAll(userPosts);
+		
 		return posts;
 	}
 	
-	@GetMapping(path="/reccomendationsList")
-	public List<ReccOut> getAllReccomendationList() {
-		return userRepo.reccomendationsListTable();
-	}
-	
+	//Tab 2 subscribtion list
 	@GetMapping(path="/users/{id}")
-	public Set<Post> getAllUsers(@PathVariable int id) {
+	public Set<Post> getAllPostsForUser(@PathVariable int id) {
 		
 		Optional<User> user = userRepo.findById(id);
 		if (!user.isPresent()) {
@@ -88,12 +103,20 @@ public class UserResourceController {
 		return posts;
 	}
 	
+	//Tab 1 Post list
+	@GetMapping(path="/posts", consumes = MediaType.ALL_VALUE, produces = { "application/json", "text/json" })
+	public List<Post> getAllPosts() {	
+		return postRepo.findAll();
+	}
+	
+	//Delete user
 	@DeleteMapping(path="/users/{id}")
 	public void deleteUser(@PathVariable int id) {
 		
 		userRepo.deleteById(id);
 	}
 	
+	//Create user
 	@PostMapping(path="/users")
 	public ResponseEntity<Object> saveUser(@Valid @RequestBody User user) {
 		Optional<User> user1 = userRepo.findById(user.getId());
@@ -106,11 +129,7 @@ public class UserResourceController {
 		return ResponseEntity.created(location).build();
 	}
 	
-	@GetMapping(path="/posts", consumes = MediaType.ALL_VALUE, produces = { "application/json", "text/json" })
-	public List<Post> getAllPosts() {	
-		return postRepo.findAll();
-	}
-	
+	//Create post for user
 	@PostMapping(path="/users/{id}/posts")
 	public ResponseEntity<Object> savePostForUser(@PathVariable int id, @RequestBody Post post) {
 		
@@ -131,6 +150,7 @@ public class UserResourceController {
 		
 	}
 	
+	//Remove post for user
 	@PostMapping(path="/users/{id}/remove_post")
 	public void deletePostForUser(@PathVariable int id, @RequestBody Post post) {
 		
@@ -151,11 +171,6 @@ public class UserResourceController {
 
 		user.setPosts(posts);
         userRepo.save(user);
-
-//		}
-//		else {
-//			throw new UserNotFoundException("id" + id);
-//		}
 
 	}
 	
