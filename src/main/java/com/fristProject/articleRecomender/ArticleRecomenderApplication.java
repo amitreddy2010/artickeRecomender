@@ -47,13 +47,16 @@ public class ArticleRecomenderApplication implements CommandLineRunner {
         Post post2 = new Post(4,"Patamar Capital",
                 "Patamar Capital exists to unlock better economic opportunities for Asia’s low-income communities. ",
                 "1.0");
-
+        Post post3 = new Post(6,"Capital IQ",
+                "The S&P Capital IQ platform combines deep and broad global financial intelligence with an array of tools for analysis.",
+                "1.0");
 
 
         // Add post reference in the tags
         user1.getPosts().add(post1);
         user2.getPosts().add(post1);
         user2.getPosts().add(post2);
+        user6.getPosts().add(post3);
 
         userRepository.save(user1);
         userRepository.save(user2);
