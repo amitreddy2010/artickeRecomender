@@ -46,13 +46,36 @@ public class UserResourceController {
 	//Matrix table1
 	@GetMapping(path="/subscriptionList")
 	public List<ReccIn> getAllSubscriptionList() {
-		return userRepo.subscriptionTable();
+		List<ReccIn> reccs = userRepo.subscriptionTable();
+		
+		List<User> users = userRepo.findAll();
+	    for (ReccIn r : reccs) {
+	    	for (User c : users) {
+	    		if (r.getUserId().equals(c.getId())) {
+	    			r.setName(c.getName());
+	    			break;
+	    		}
+	    	}
+	    }
+		return reccs;
+		
 	}
 	
 	//Matrix table2
 	@GetMapping(path="/reccomendationsList")
 	public List<ReccOut> getAllReccomendationList() {
-		return userRepo.reccomendationsListTable();
+		List<ReccOut> reccs = userRepo.reccomendationsListTable();
+		
+		List<User> users = userRepo.findAll();
+	    for (ReccOut r : reccs) {
+	    	for (User c : users) {
+	    		if (r.getUserId().equals(c.getId())) {
+	    			r.setName(c.getName());
+	    			break;
+	    		}
+	    	}
+	    }
+		return reccs;
 	}
 	
 	//Tab 3 recommendation list

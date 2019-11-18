@@ -13,6 +13,9 @@ public class ReccOut {
 	@Id
 	private Integer userId;
 	
+    @Size(max = 100)
+    private String name;
+	
 	@NotNull
     @Size(max = 100)
     private String reccValues;
@@ -25,6 +28,14 @@ public class ReccOut {
 		this.userId = userId;
 	}
 
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public String getReccValues() {
 		return reccValues;
 	}
@@ -33,9 +44,10 @@ public class ReccOut {
 		this.reccValues = reccValues;
 	}
 
-	public ReccOut(Integer userId, @NotNull @Size(max = 100) String reccValues) {
+	public ReccOut(Integer userId, @NotNull @Size(max = 100) String name, @NotNull @Size(max = 100) String reccValues) {
 		super();
 		this.userId = userId;
+		this.name = name;
 		this.reccValues = reccValues;
 	}
 
