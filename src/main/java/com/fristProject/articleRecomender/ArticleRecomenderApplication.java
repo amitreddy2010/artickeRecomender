@@ -42,26 +42,25 @@ public class ArticleRecomenderApplication implements CommandLineRunner {
         
      // Create a Post
         Post post0 = new Post(0,"Microsoft",
-                "DBS Group Holdings Limited and its subsidiaries provide a variety of financial services. ",
-                "1.0");
+                "DBS Group Holdings Limited and its subsidiaries provide a variety of financial services. ", "1.0", "Bonds", "SGD", "Global Aggregate", "1.85%", "1.19%", "5.00%", "3.52%");
         Post post1 = new Post(1,"DBS Holdings",
                 "DBS Group Holdings Limited and its subsidiaries provide a variety of financial services. ",
-                "1.0");
+                "1.0", "Bonds", "SGD", "Global Aggregate", "1.85%", "1.19%", "5.00%", "3.52%");
         Post post2 = new Post(2,"Jardine Strategic Holdings Ltd",
                 "JSH offers a more direct exposure to the various companies under its portfolio.",
-                "1.0");
+                "1.0", "Bonds", "SGD", "Global Aggregate", "1.85%", "1.19%", "5.00%", "3.52%");
         Post post3 = new Post(3,"Singapore Telecommunications Ltd",
                 "STEL operates one of the largest communications company in Asia",
-                "1.0");
+                "1.0", "Bonds", "SGD", "Global Aggregate", "1.85%", "1.19%", "5.00%", "3.52%");
         Post post4 = new Post(4,"Patamar Capital",
                 "Patamar Capital exists to unlock better economic opportunities for Asia’s low-income communities. ",
-                "1.0");
+                "1.0", "Bonds", "SGD", "Global Aggregate", "1.85%", "1.19%", "5.00%", "3.52%");
         Post post5 = new Post(5,"Hongkong Land Holdings Ltd",
                 "HKLD had been known to have steadily increased its dividend per share through to recently",
-                "1.0");
+                "1.0", "Bonds", "SGD", "Global Aggregate", "1.85%", "1.19%", "5.00%", "3.52%");
         Post post6 = new Post(6,"Capital IQ",
                 "The S&P Capital IQ platform combines deep and broad global financial intelligence with an array of tools for analysis.",
-                "1.0");
+                "1.0", "Bonds", "SGD", "Global Aggregate", "1.85%", "1.19%", "5.00%", "3.52%");
 
 
         // Add post reference in the tags
