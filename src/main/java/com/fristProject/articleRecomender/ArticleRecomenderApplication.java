@@ -41,26 +41,27 @@ public class ArticleRecomenderApplication implements CommandLineRunner {
         User user6 = new User(5,"Sandip");
         
      // Create a Post
-        Post post0 = new Post(0,"Microsoft",
-                "DBS Group Holdings Limited and its subsidiaries provide a variety of financial services. ", "1.0", "Bonds", "SGD", "Global Aggregate", "1.85%", "1.19%", "5.00%", "3.52%");
-        Post post1 = new Post(1,"DBS Holdings",
-                "DBS Group Holdings Limited and its subsidiaries provide a variety of financial services. ",
+        Post post0 = new Post(0,"AllianceBernstein - American Income Portfolio - AT - SGD - Hedged - Mdis - Cash",
+                "The primary investment objective of the Portfolio is to seek to provide a high level of current income consistent with preservation of capital. ",
                 "1.0", "Bonds", "SGD", "Global Aggregate", "1.85%", "1.19%", "5.00%", "3.52%");
-        Post post2 = new Post(2,"Jardine Strategic Holdings Ltd",
-                "JSH offers a more direct exposure to the various companies under its portfolio.",
-                "1.0", "Bonds", "SGD", "Global Aggregate", "1.85%", "1.19%", "5.00%", "3.52%");
-        Post post3 = new Post(3,"Singapore Telecommunications Ltd",
-                "STEL operates one of the largest communications company in Asia",
-                "1.0", "Bonds", "SGD", "Global Aggregate", "1.85%", "1.19%", "5.00%", "3.52%");
-        Post post4 = new Post(4,"Patamar Capital",
-                "Patamar Capital exists to unlock better economic opportunities for Asia’s low-income communities. ",
-                "1.0", "Bonds", "SGD", "Global Aggregate", "1.85%", "1.19%", "5.00%", "3.52%");
-        Post post5 = new Post(5,"Hongkong Land Holdings Ltd",
-                "HKLD had been known to have steadily increased its dividend per share through to recently",
-                "1.0", "Bonds", "SGD", "Global Aggregate", "1.85%", "1.19%", "5.00%", "3.52%");
-        Post post6 = new Post(6,"Capital IQ",
-                "The S&P Capital IQ platform combines deep and broad global financial intelligence with an array of tools for analysis.",
-                "1.0", "Bonds", "SGD", "Global Aggregate", "1.85%", "1.19%", "5.00%", "3.52%");
+        Post post1 = new Post(1,"Fidelity Asian High Yield Fund - A - SGD - Hedged - Mdis - Cash",
+                "This fund seeks a high level of current income and capital appreciation by investing primarily in high-yielding sub investment grade securities of issuers",
+                "1.0", "Bonds", "SGD", "N. American Equity", "2.50%", "3.48%", "11.53%", "7.32%");
+        Post post2 = new Post(2,"First State Dividend Advantage Fund - SGD - Qdis - Cash",
+                "The investment objective of the First State Dividend Advantage is to provide investors with regular distributions and long-term growth from high dividend ",
+                "1.0", "Equity", "SGD", "APxJ Equity", "5.32%", "7.48%", "17.66%", "11.33%");
+        Post post3 = new Post(3,"Neuberger Berman High Yield Bond Fund - A - Mdis - SGD - Cash",
+                "Achieve an attractive level of total return income plus capital appreciation from the high yield fixed income market.",
+                "1.0", "Bonds", "SGD", "US High Yield", "1.51%", "3.29%", "9.87%", "2.92%");
+        Post post4 = new Post(4,"JPMorgan IF - Global Income - A - SGD - Hedged - Dis - Cash",
+                "the fund aims to provide regular income by investing primarily in a portfolio of income generating securities, globally, use of financial derivative instruments.",
+                "1.0", "Equity", "SGD", "Global Aggregate", "2.28%", "4.46%", "8.50%", "4.71%");
+        Post post5 = new Post(5,"JPM Global Income - A - Mth - SGD Hedged - Cash",
+                "the fund aims to provide regular income by investing primarily in a portfolio of income generating securities, globally, use of financial derivative instruments.",
+                "1.0", "Bonds", "SGD", "Global Balanced", "2.26%", "4.50%", "8.48%", "4.59%");
+        Post post6 = new Post(6,"Jupiter Dynamic Bond Fund - L - SGD - Mdis - Cash",
+                "The investment objective of the Fund is to achieve a high income with the prospect of capital growth from a portfolio of investments in global securities.",
+                "1.0", "Bonds", "SGD", "Global Aggregate", "1.22%", "1.84%", "6.00%", "4.27%");
 
 
         // Add post reference in the tags
