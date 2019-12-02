@@ -66,7 +66,7 @@ public class ArticleRecomenderApplication implements CommandLineRunner {
 
         // Add post reference in the tags
         user1.getPosts().add(post1);
-        user2.getPosts().add(post1);
+        user2.getPosts().add(post0);
         user2.getPosts().add(post2);
         user3.getPosts().add(post3);
         user4.getPosts().add(post4);
