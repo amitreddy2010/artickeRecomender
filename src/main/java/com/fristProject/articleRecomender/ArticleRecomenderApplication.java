@@ -74,7 +74,7 @@ public class ArticleRecomenderApplication implements CommandLineRunner {
         user5.getPosts().add(post4);
         user6.getPosts().add(post3);
 
-        postRepository.save(post0);
+//        postRepository.save(post0);
         postRepository.save(post5);
         userRepository.save(user1);
         userRepository.save(user2);
