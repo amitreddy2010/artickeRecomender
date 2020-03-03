@@ -31,7 +31,6 @@ public class ArticleRecomenderApplication implements CommandLineRunner {
 //        userRepository.resetUserTable();
         // =======================================
 
-        
         // Create two tags
         User user1 = new User(0,"Amit");
         User user2 = new User(1,"Suresh");
